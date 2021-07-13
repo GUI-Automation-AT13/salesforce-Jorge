@@ -44,6 +44,7 @@ public final class DriverFactory {
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
         }
+        driver.manage().window().maximize();
         return driver;
     }
 

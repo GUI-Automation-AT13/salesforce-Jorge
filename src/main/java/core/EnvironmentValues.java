@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -20,8 +20,6 @@ import java.util.Properties;
  * This class reads a properties file.
  */
 public final class EnvironmentValues {
-    private EnvironmentValues() {
-    }
 
     public static Properties configProperties = new Properties();
 
@@ -50,7 +48,7 @@ public final class EnvironmentValues {
         try (InputStream reading = new FileInputStream(file)) {
             properties.load(reading);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IOException();
         }
         return properties;
     }
