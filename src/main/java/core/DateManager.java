@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Jorge Rodrigo Cáceres Velasco
+ */
 package core;
 
 import java.text.ParseException;
@@ -10,6 +20,12 @@ public class DateManager {
     public Calendar calendar;
     SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
+    /**
+     * Converts a String to a Date.
+     *
+     * @param date is the string with a date format
+     * @return a Date object
+     */
     public Date manageDate(final String date) throws ParseException {
         dateToConvert = date.toLowerCase();
         calendar = Calendar.getInstance();
@@ -23,6 +39,8 @@ public class DateManager {
             case "yesterday":
                 calendar.add(Calendar.DAY_OF_MONTH, -1);
                 break;
+            default:
+                calendar.add(Calendar.MILLISECOND, 0);
         }
         if (dateToConvert.contains("ago")) {
             Reader dateReader = new Reader();
