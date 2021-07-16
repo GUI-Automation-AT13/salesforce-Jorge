@@ -1,6 +1,6 @@
 package salesforce.ui.pages;
 
-import org.openqa.selenium.WebDriver;
+import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,21 +16,9 @@ public class LoginPage extends BasePage {
     @FindBy(id = "Login")
     private WebElement loginBtn;
 
-    /**
-     * Initializes the elements and wait for page to be loaded.
-     *
-     * @param driver The given driver.
-     */
-    public LoginPage(final WebDriver driver) {
-        super(driver);
-    }
-
-    /**
-     * Waits for the login button to be charged.
-     */
     @Override
     protected void waitForPageLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(loginBtn));
+        WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(loginBtn));
     }
 
     /**
@@ -73,6 +61,7 @@ public class LoginPage extends BasePage {
         setUserName(userName);
         setPassword(password);
         clickLoginBtn();
-        return new HomePage(driver);
+        return new HomePage();
     }
+
 }
