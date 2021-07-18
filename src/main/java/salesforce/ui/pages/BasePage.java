@@ -1,10 +1,7 @@
 package salesforce.ui.pages;
 
 import core.selenium.WebDriverManager;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import salesforce.config.EnvConfig;
 
 /**
  * Load home page.

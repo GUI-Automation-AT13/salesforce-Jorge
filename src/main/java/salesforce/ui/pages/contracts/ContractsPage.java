@@ -15,16 +15,27 @@ public class ContractsPage extends BasePage {
     @FindBy(id = "tryLexDialogX")
     private WebElement popup;
 
+    /**
+     * Waits for the page to be loaded.
+     */
     @Override
     protected void waitForPageLoaded() {
         WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(newContractButton));
     }
-    public void clickPopUP(){
+
+    /**
+     * Closes a popup.
+     */
+    public void clickPopUP() {
         WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(By.id("tryLexDialogX")));
         popup.click();
     }
-
-    public NewContractPage clickNew(){
+    /**
+     * Clicks on a new contract button.
+     *
+     * @return a new NewContractPage.
+     */
+    public NewContractPage clickNew() {
         newContractButton.click();
         return new NewContractPage();
     }

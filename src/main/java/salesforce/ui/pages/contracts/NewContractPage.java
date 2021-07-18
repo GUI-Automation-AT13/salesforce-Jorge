@@ -24,7 +24,7 @@ public class NewContractPage extends BasePage {
     @FindBy(css = "#ctrc13")
     private WebElement ownerExpirationNotice;
     @FindBy(css = "#CompanySignedDate")
-    private WebElement CompanySignedDate;
+    private WebElement companySignedDate;
     @FindBy(css = "#ctrc25street")
     private WebElement billingStreet;
     @FindBy(css = "#ctrc25city")
@@ -46,86 +46,168 @@ public class NewContractPage extends BasePage {
     @FindBy(css = "td[id='bottomButtonRow'] input[title='Cancel']")
     private WebElement cancel;
 
+    /**
+     * Waits for the page to be loaded.
+     */
     @Override
     protected void waitForPageLoaded() {
         WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(accountName));
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName.sendKeys(accountName);
+    /**
+     * Sets the account name on a contract.
+     *
+     * @param newAccountName
+     */
+    public void setAccountName(final String newAccountName) {
+        this.accountName.sendKeys(newAccountName);
     }
-
-    public void setCustomerSignedBy(WebElement customerSignedBy) {
-        this.customerSignedBy = customerSignedBy;
+    /**
+     * Sets the CustomerSignedBy element.
+     *
+     * @param newCustomerSignedBy to be typed.
+     */
+    public void setCustomerSignedBy(final WebElement newCustomerSignedBy) {
+        this.customerSignedBy = newCustomerSignedBy;
     }
-
-    public void setCustomerSignedTittle(WebElement customerSignedTittle) {
-        this.customerSignedTittle = customerSignedTittle;
+    /**
+     * Sets the CustomerSignedTittle element.
+     *
+     * @param newCustomerSignedTittle to be typed.
+     */
+    public void setCustomerSignedTittle(final WebElement newCustomerSignedTittle) {
+        this.customerSignedTittle = newCustomerSignedTittle;
     }
-
-    public void setCustomerSignedDate(WebElement customerSignedDate) {
-        this.customerSignedDate = customerSignedDate;
+    /**
+     * Sets the customerSignedDate element.
+     *
+     * @param newCustomerSignedDate to be typed.
+     */
+    public void setCustomerSignedDate(final WebElement newCustomerSignedDate) {
+        this.customerSignedDate = newCustomerSignedDate;
     }
-
-    public void setPriceBook(WebElement priceBook) {
-        this.priceBook = priceBook;
+    /**
+     * Sets the priceBook element.
+     *
+     * @param newPriceBook to be typed.
+     */
+    public void setPriceBook(final WebElement newPriceBook) {
+        this.priceBook = newPriceBook;
     }
-
-    public void setContractStartDate(String contractStartDate) {
-        this.contractStartDate.sendKeys(contractStartDate);
+    /**
+     * Sets the contractStartDate element.
+     *
+     * @param newContractStartDate to be typed.
+     */
+    public void setContractStartDate(final String newContractStartDate) {
+        this.contractStartDate.sendKeys(newContractStartDate);
     }
-
-    public void setContractTermMonths(String contractTermMonths) {
-        this.contractTermMonths.sendKeys(contractTermMonths);
+    /**
+     * Sets the contractTermMonths element.
+     *
+     * @param newContractTermMonths to be typed.
+     */
+    public void setContractTermMonths(final String newContractTermMonths) {
+        this.contractTermMonths.sendKeys(newContractTermMonths);
     }
-
-    public void setOwnerExpirationNotice(WebElement ownerExpirationNotice) {
-        this.ownerExpirationNotice = ownerExpirationNotice;
+    /**
+     * Sets the ownerExpirationNotice element.
+     *
+     * @param newOwnerExpirationNotice to be typed.
+     */
+    public void setOwnerExpirationNotice(final WebElement newOwnerExpirationNotice) {
+        this.ownerExpirationNotice = newOwnerExpirationNotice;
     }
-
-    public void setCompanySignedDate(WebElement companySignedDate) {
-        CompanySignedDate = companySignedDate;
+    /**
+     * Sets the companySignedDate element.
+     *
+     * @param newCompanySignedDate to be typed.
+     */
+    public void setCompanySignedDate(final WebElement newCompanySignedDate) {
+        this.companySignedDate = newCompanySignedDate;
     }
-
-    public void setBillingStreet(WebElement billingStreet) {
-        this.billingStreet = billingStreet;
+    /**
+     * Sets the billingStreet element.
+     *
+     * @param newBillingStreet to be typed.
+     */
+    public void setBillingStreet(final WebElement newBillingStreet) {
+        this.billingStreet = newBillingStreet;
     }
-
-    public void setBillingCity(WebElement billingCity) {
-        this.billingCity = billingCity;
+    /**
+     * Sets the billingCity element.
+     *
+     * @param newBillingCity to be typed.
+     */
+    public void setBillingCity(final WebElement newBillingCity) {
+        this.billingCity = newBillingCity;
     }
-
-    public void setBillingState(WebElement billingState) {
-        this.billingState = billingState;
+    /**
+     * Sets the billingState element.
+     *
+     * @param newBillingState to be typed.
+     */
+    public void setBillingState(final WebElement newBillingState) {
+        this.billingState = newBillingState;
     }
-
-    public void setBillingPostalCode(WebElement billingPostalCode) {
-        this.billingPostalCode = billingPostalCode;
+    /**
+     * Sets the billingPostalCode element.
+     *
+     * @param newBillingPostalCode to be typed.
+     */
+    public void setBillingPostalCode(final WebElement newBillingPostalCode) {
+        this.billingPostalCode = newBillingPostalCode;
     }
-
-    public void setBillingCountry(WebElement billingCountry) {
-        this.billingCountry = billingCountry;
+    /**
+     * Sets the billingCountry element.
+     *
+     * @param newBillingCountry to be typed.
+     */
+    public void setBillingCountry(final WebElement newBillingCountry) {
+        this.billingCountry = newBillingCountry;
     }
-
-    public void setSpecialTerms(WebElement specialTerms) {
-        this.specialTerms = specialTerms;
+    /**
+     * Sets the specialTerms element.
+     *
+     * @param newSpecialTerms to be typed.
+     */
+    public void setSpecialTerms(final WebElement newSpecialTerms) {
+        this.specialTerms = newSpecialTerms;
     }
-
-    public void setDescription(WebElement description) {
-        this.description = description;
+    /**
+     * Sets the description element.
+     *
+     * @param newDescription to be typed.
+     */
+    public void setDescription(final WebElement newDescription) {
+        this.description = newDescription;
     }
-
+    /**
+     * Clicks on the save button.
+     *
+     * @return a CreatedContractPage.
+     */
     public CreatedContractPage clickSave() {
         this.save.click();
         return new CreatedContractPage();
     }
-
-    public void clickSaveAndNew(WebElement saveAndNew) {
-        this.saveAndNew = saveAndNew;
+    /**
+     * Clicks on the save and new button and goes to a new contract to be created.
+     *
+     * @return a NewContractPage.
+     */
+    public NewContractPage clickSaveAndNew() {
+        this.saveAndNew.click();
+        return new NewContractPage();
     }
-
-    public void clickCancel(WebElement cancel) {
-        this.cancel = cancel;
+    /**
+     * Clicks on the cancel button.
+     *
+     * @return a ContractsPage.
+     */
+    public ContractsPage clickCancel() {
+        this.cancel.click();
+        return new ContractsPage();
     }
 
 }

@@ -16,6 +16,9 @@ public class LoginPage extends BasePage {
     @FindBy(id = "Login")
     private WebElement loginBtn;
 
+    /**
+     * Waits for the page to be loaded.
+     */
     @Override
     protected void waitForPageLoaded() {
         WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(loginBtn));
