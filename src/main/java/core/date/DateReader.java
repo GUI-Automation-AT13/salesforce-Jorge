@@ -68,6 +68,11 @@ public class DateReader {
         } catch (IllegalArgumentException e) {
             throw new NumberFormatException("Invalid Argument: Unsupported String Format.");
         }
+        if (quantity == 1) {
+            if (date.contains("s ago") || date.contains("s from")) {
+                throw new NumberFormatException("Invalid Argument: Unsupported String Format.");
+            }
+        }
         return quantity;
     }
 }
