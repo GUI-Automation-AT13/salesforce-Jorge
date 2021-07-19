@@ -1,4 +1,4 @@
-package salesforce.ui.pages.contracts;
+package salesforce.ui.pages.classic.contracts;
 
 import core.selenium.WebDriverManager;
 import org.openqa.selenium.By;

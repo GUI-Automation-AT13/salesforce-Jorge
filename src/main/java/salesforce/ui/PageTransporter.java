@@ -9,7 +9,7 @@ package salesforce.ui;
 
 import core.selenium.WebDriverManager;
 import salesforce.config.EnvConfig;
-import salesforce.ui.pages.contracts.ContractsPage;
+import salesforce.ui.pages.classic.contracts.ContractsPage;
 
 public class PageTransporter {
 

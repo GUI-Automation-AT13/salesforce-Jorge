@@ -1,11 +1,11 @@
-package salesforce.ui.pages.contracts;
+package salesforce.ui.pages.classic.contracts;
 
 import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.ui.pages.BasePage;
-import salesforce.ui.pages.HomePageObjects;
+import salesforce.ui.pages.classic.HomePageObjects;
 
 public class CreatedContractPage extends BasePage {
 

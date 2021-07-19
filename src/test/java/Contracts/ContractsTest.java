@@ -4,11 +4,11 @@ import base.BaseTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import salesforce.config.EnvConfig;
-import salesforce.ui.pages.HomePage;
+import salesforce.ui.pages.classic.HomePage;
 import salesforce.ui.pages.LoginPage;
-import salesforce.ui.pages.contracts.ContractsPage;
-import salesforce.ui.pages.contracts.CreatedContractPage;
-import salesforce.ui.pages.contracts.NewContractPage;
+import salesforce.ui.pages.classic.contracts.ContractsPage;
+import salesforce.ui.pages.classic.contracts.CreatedContractPage;
+import salesforce.ui.pages.classic.contracts.NewContractPage;
 
 public class ContractsTest extends BaseTests {
 
