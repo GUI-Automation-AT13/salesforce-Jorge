@@ -1,6 +1,6 @@
 package salesforce.ui.pages;
 
-import org.openqa.selenium.WebDriver;
+import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,19 +14,20 @@ public class HomePage extends BasePage {
     private WebElement addObject;
 
     /**
-     * Initializes the elements and wait for page to be loaded.
-     *
-     * @param driver The given driver.
-     */
-    public HomePage(final WebDriver driver) {
-        super(driver);
-    }
-
-    /**
-     * Waits for the addObjects button to be charged.
+     * Waits for the page to be loaded.
      */
     @Override
     protected void waitForPageLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(addObject));
+        WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(addObject));
+    }
+
+    /**
+     * Clicks the addObject button.
+     *
+     * @return a HomePageObjects.
+     */
+    public HomePageObjects clickAddObject() {
+        addObject.click();
+        return new HomePageObjects();
     }
 }

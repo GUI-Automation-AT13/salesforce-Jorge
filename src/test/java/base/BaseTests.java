@@ -1,26 +1,20 @@
 package base;
 
-import drivermanager.DriverFactory;
-import drivermanager.DriverType;
-import org.openqa.selenium.WebDriver;
+import core.selenium.WebDriverManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import salesforce.ui.pages.LoginPage;
-
-import static core.EnvironmentValues.obtainEnvVariables;
+import salesforce.config.EnvConfig;
+import salesforce.ui.PageTransporter;
 
 public class BaseTests {
-    private WebDriver driver;
-    protected LoginPage loginPage;
+    public PageTransporter pageTransporter = new PageTransporter();
 
     @BeforeClass
-    public void setUP(){
-        driver = DriverFactory.getDriver(DriverType.CHROME);
-        driver.get(obtainEnvVariables("LOGIN_URL"));
-        loginPage = new LoginPage(driver);
+    public void setup() {
+        WebDriverManager.getInstance().getWebDriver().get(EnvConfig.getInstance().getLoginUrl());
     }
     @AfterClass
     public void tearDown(){
-        driver.quit();
+        WebDriverManager.getInstance().getWebDriver().quit();
     }
 }

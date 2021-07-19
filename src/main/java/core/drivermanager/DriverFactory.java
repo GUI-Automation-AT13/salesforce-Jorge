@@ -8,7 +8,7 @@
  *
  * @author Jorge Rodrigo Cáceres Velasco
  */
-package drivermanager;
+package core.drivermanager;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -28,23 +28,22 @@ public final class DriverFactory {
      * @param type to define which type will be returned.
      * @return the driver type.
      */
-    public static WebDriver getDriver(final DriverType type) {
+    public static WebDriver getDriver(final String type) {
 
         WebDriver driver;
 
         switch (type) {
-            case CHROME:
+            case "CHROME":
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
                 break;
-            case FIREFOX:
+            case "FIREFOX":
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             default:
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
         }
-        driver.manage().window().maximize();
         return driver;
     }
 
