@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -8,11 +8,13 @@
  *
  * @author Jorge Rodrigo Cáceres Velasco
  */
-package core;
+package core.date;
+
+import org.openqa.selenium.InvalidArgumentException;
 
 import java.util.Calendar;
 
-public class Reader {
+public class DateReader {
     private int timeUnit;
     private int quantity;
 
@@ -24,26 +26,35 @@ public class Reader {
      */
     public int getTimeUnit(final String date) {
         timeUnit = 0;
+
         if (date.contains("second")) {
             timeUnit = Calendar.SECOND;
+            return timeUnit;
         }
         if (date.contains("minute")) {
             timeUnit = Calendar.MINUTE;
+            return timeUnit;
         }
         if (date.contains("hour")) {
             timeUnit = Calendar.HOUR;
+            return timeUnit;
         }
         if (date.contains("day")) {
             timeUnit = Calendar.DAY_OF_MONTH;
+            return timeUnit;
         }
         if (date.contains("month")) {
             timeUnit = Calendar.MONTH;
+            return timeUnit;
         }
         if (date.contains("year")) {
             timeUnit = Calendar.YEAR;
+            return timeUnit;
         }
-        return timeUnit;
+        throw new InvalidArgumentException("Invalid Argument: Unsupported String Format.");
+
     }
+
     /**
      * Obtains the values to be set.
      *
@@ -52,7 +63,11 @@ public class Reader {
      */
     public int getQuantity(final String date) {
         String numberOnly = date.replaceAll("[^0-9]", "");
-        quantity = Integer.parseInt(numberOnly);
+        try {
+            quantity = Integer.parseInt(numberOnly);
+        } catch (IllegalArgumentException e) {
+            throw new NumberFormatException("Invalid Argument: Unsupported String Format.");
+        }
         return quantity;
     }
 }

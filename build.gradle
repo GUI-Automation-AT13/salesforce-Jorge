@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'checkstyle'
+    id 'info.solidsoft.pitest' version '1.5.1'
 }
 
 group 'org.example'
@@ -23,6 +24,13 @@ checkstyle {
     configFile file('checkstyle.xml')
     checkstyleMain.source = "src/main/"
     checkstyleMain.excludes = ["**/src/test/**"]
+}
+pitest {
+    testPlugin='testng'
+    targetClasses = ['core.date*']
+    targetTests = ['unittests.*']
+    threads = 4
+    outputFormats = ['XML', 'HTML']
 }
 
 checkstyleMain {
