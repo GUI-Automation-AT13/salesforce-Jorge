@@ -19,11 +19,40 @@ public class WebElementAction {
      * Waits until a text box is visible and writes a text.
      *
      * @param webElement the web element to be waited.
-     * @param typeText the text to be typed.
      */
-    public void waitForVisible(final WebElement webElement, final String typeText) {
+    public void waitForVisible(final WebElement webElement) {
+        WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
+    }
+    /**
+     * Sets a webElement with a value.
+     *
+     * @param webElement that will be set.
+     * @param typeText value that will set.
+     */
+    public void setInputField(final WebElement webElement, final String typeText) {
         WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
         webElement.clear();
         webElement.sendKeys(typeText);
+    }
+
+    /**
+     * Clicks a webElement.
+     *
+     * @param webElement is what we want to click.
+     */
+    public void clickField(final WebElement webElement) {
+        WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
+        webElement.click();
+    }
+
+    /**
+     * Gets the text of a web element.
+     *
+     * @param webElement web element to get text.
+     * @return web element's text
+     */
+    public String getTextOfElement(final WebElement webElement) {
+        WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
+        return webElement.getText();
     }
 }

@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.ui.pages.BasePage;
-import salesforce.ui.pages.classic.HomePageObjects;
+import salesforce.ui.pages.classic.ClassicHomePageObjects;
 
-public class CreatedContractPage extends BasePage {
+public class ClassicCreatedContractPage extends BasePage {
 
     @FindBy(css = "div[id*=\"ctrc7_ileinner\"]")
     private WebElement accountName;
@@ -28,9 +28,9 @@ public class CreatedContractPage extends BasePage {
      *
      * @return a HomePageObjects.
      */
-    public HomePageObjects clickAddObjects() {
+    public ClassicHomePageObjects clickAddObjects() {
         addObjects.click();
-        return new HomePageObjects();
+        return new ClassicHomePageObjects();
     }
 
     /**

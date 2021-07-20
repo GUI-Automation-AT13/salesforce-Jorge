@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.ui.pages.BasePage;
-import salesforce.ui.pages.classic.contracts.ContractsPage;
+import salesforce.ui.pages.classic.contracts.ClassicContractsPage;
 
-public class HomePageObjects extends BasePage {
+public class ClassicHomePageObjects extends BasePage {
 
     @FindBy(css = ".listRelatedObject.contractBlock.title")
     private WebElement contractBtn;
@@ -24,8 +24,8 @@ public class HomePageObjects extends BasePage {
      *
      * @return a new ContractsPage
      */
-    public ContractsPage clickAddObject() {
+    public ClassicContractsPage clickAddObject() {
         contractBtn.click();
-        return new ContractsPage();
+        return new ClassicContractsPage();
     }
 }

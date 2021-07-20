@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.ui.pages.BasePage;
 
-public class NewContractPage extends BasePage {
+public class ClassicNewContractPage extends BasePage {
     @FindBy(css = "#ctrc7")
     private WebElement accountName;
     @FindBy(css = "#ctrc16")
@@ -223,9 +223,9 @@ public class NewContractPage extends BasePage {
      *
      * @return a CreatedContractPage.
      */
-    public CreatedContractPage clickSave() {
+    public ClassicCreatedContractPage clickSave() {
         this.save.click();
-        return new CreatedContractPage();
+        return new ClassicCreatedContractPage();
     }
 
     /**
@@ -233,9 +233,9 @@ public class NewContractPage extends BasePage {
      *
      * @return a NewContractPage.
      */
-    public NewContractPage clickSaveAndNew() {
+    public ClassicNewContractPage clickSaveAndNew() {
         this.saveAndNew.click();
-        return new NewContractPage();
+        return new ClassicNewContractPage();
     }
 
     /**
@@ -243,9 +243,9 @@ public class NewContractPage extends BasePage {
      *
      * @return a ContractsPage.
      */
-    public ContractsPage clickCancel() {
+    public ClassicContractsPage clickCancel() {
         this.cancel.click();
-        return new ContractsPage();
+        return new ClassicContractsPage();
     }
 
 }

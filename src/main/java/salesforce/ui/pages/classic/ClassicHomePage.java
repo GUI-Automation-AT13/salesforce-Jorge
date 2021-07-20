@@ -9,7 +9,7 @@ import salesforce.ui.pages.BasePage;
 /**
  * Initializes the Web elements.
  */
-public class HomePage extends BasePage {
+public class ClassicHomePage extends BasePage {
 
     @FindBy(css = ".allTabsArrow")
     private WebElement addObject;
@@ -27,8 +27,8 @@ public class HomePage extends BasePage {
      *
      * @return a HomePageObjects.
      */
-    public HomePageObjects clickAddObject() {
+    public ClassicHomePageObjects clickAddObject() {
         addObject.click();
-        return new HomePageObjects();
+        return new ClassicHomePageObjects();
     }
 }

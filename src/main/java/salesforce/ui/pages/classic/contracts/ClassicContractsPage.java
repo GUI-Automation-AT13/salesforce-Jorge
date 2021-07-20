@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.ui.pages.BasePage;
 
-public class ContractsPage extends BasePage {
+public class ClassicContractsPage extends BasePage {
 
     @FindBy(css = "input[title='New']")
     private WebElement newContractButton;
@@ -35,9 +35,9 @@ public class ContractsPage extends BasePage {
      *
      * @return a new NewContractPage.
      */
-    public NewContractPage clickNew() {
+    public ClassicNewContractPage clickNew() {
         newContractButton.click();
-        return new NewContractPage();
+        return new ClassicNewContractPage();
     }
 
 }
