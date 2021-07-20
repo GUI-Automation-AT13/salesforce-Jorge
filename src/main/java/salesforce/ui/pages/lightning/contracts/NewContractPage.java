@@ -41,9 +41,9 @@ public class NewContractPage extends BasePage {
     private WebElement billingPostalCode;
     @FindBy(css = "input[placeholder='Billing Country']")
     private WebElement billingCountry;
-    @FindBy(css = "textarea[id='712:1111;a']")
+    @FindBy(xpath = "(//textarea[@class=\" textarea\" ])[1]")
     private WebElement specialTerms;
-    @FindBy(css = "textarea[id='732:1111;a']")
+    @FindBy(xpath = "(//textarea[@class=\" textarea\" ])[last()]")
     private WebElement description;
     @FindBy(css = "button[title='Save']")
     private WebElement save;

@@ -28,6 +28,23 @@ public class ContractTest extends BaseTests {
         newContractPage.clickAccountSelector();
         newContractPage.setContractTermMonths("2");
         newContractPage.setContractStartDate("7/15/2021");
+        newContractPage.setCustomerSignedBy("TestContact");
+        newContractPage.clickContactSelector();
+        newContractPage.setCustomerSignedTittle("tittle");
+        newContractPage.setCustomerSignedDate("7/15/2021");
+        newContractPage.setPriceBook("Standard");
+        newContractPage.selectPriceBook();
+        newContractPage.clickOwnerExpirationNotice();
+        newContractPage.selectOwnerExpirationNotice();
+        newContractPage.setCompanySignedDate("7/19/2021");
+        newContractPage.setBillingStreet("Billing Street");
+        newContractPage.setBillingCity("Billing City");
+        newContractPage.setBillingStreet("Billing Street");
+        newContractPage.setBillingState("Billing state");
+        newContractPage.setBillingPostalCode("Billing postal code");
+        newContractPage.setBillingCountry("Billing country");
+        newContractPage.setSpecialTerms("SpecialTerms");
+        newContractPage.setDescription("Description");
         createdContractPage = newContractPage.clickSave();
         Assert.assertEquals(createdContractPage.getAccountName(), "TestAccount");
     }
