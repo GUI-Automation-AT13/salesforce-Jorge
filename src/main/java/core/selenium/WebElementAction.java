@@ -7,6 +7,8 @@
  */
 package core.selenium;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -23,11 +25,12 @@ public class WebElementAction {
     public void waitForVisible(final WebElement webElement) {
         WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
     }
+
     /**
      * Sets a webElement with a value.
      *
      * @param webElement that will be set.
-     * @param typeText value that will set.
+     * @param typeText   value that will set.
      */
     public void setInputField(final WebElement webElement, final String typeText) {
         WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
@@ -46,6 +49,14 @@ public class WebElementAction {
     }
 
     /**
+     * Scrolls to the end of the page.
+     */
+    public void dropDownTillTheEnd() {
+        JavascriptExecutor jse = (JavascriptExecutor) WebDriverManager.getInstance().getWebDriver();
+        jse.executeScript("window.scrollBy(0,250)");
+    }
+
+    /**
      * Gets the text of a web element.
      *
      * @param webElement web element to get text.
@@ -54,5 +65,15 @@ public class WebElementAction {
     public String getTextOfElement(final WebElement webElement) {
         WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
         return webElement.getText();
+    }
+
+    /**
+     * Gets the text of a web element.
+     *
+     * @param field web element to get text.
+     * @return web element's text
+     */
+    public String getTextOfElementByField(final String field) {
+        return WebDriverManager.getInstance().getWebDriver().findElement(By.xpath(field)).getText();
     }
 }

@@ -1,7 +1,6 @@
 package Contracts;
 
 import base.BaseTests;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import salesforce.config.EnvConfig;
 import salesforce.ui.pages.LoginPage;
@@ -46,6 +45,30 @@ public class ContractTest extends BaseTests {
         newContractPage.setSpecialTerms("SpecialTerms");
         newContractPage.setDescription("Description");
         createdContractPage = newContractPage.clickSave();
-        Assert.assertEquals(createdContractPage.getAccountName(), "TestAccount");
+        createdContractPage.clickDetails();
+        softAssert.assertEquals(createdContractPage.getTextByField("Account Name"),
+                "TestAccount");
+        softAssert.assertEquals(createdContractPage.getTextByField("Contract Term (months)"),
+                "2");
+        softAssert.assertEquals(createdContractPage.contractStartDateText(),
+                "7/15/2021");
+        softAssert.assertEquals(createdContractPage.getTextByField("Customer Signed By"),
+                "TestContact");
+        softAssert.assertEquals(createdContractPage.getTextByField("Customer Signed Title"),
+                "tittle");
+        softAssert.assertEquals(createdContractPage.getTextByField("Customer Signed Date"),
+                "7/15/2021");
+        softAssert.assertEquals(createdContractPage.getTextByField("Price Book"),
+                "Standard");
+        softAssert.assertEquals(createdContractPage.getTextByField("Owner Expiration Notice"),
+                "15 Days");
+        softAssert.assertEquals(createdContractPage.getTextByField("Company Signed Date"),
+                "7/19/2021");
+        softAssert.assertEquals(createdContractPage.getTextByField("Special Terms"),
+                "SpecialTerms");
+        softAssert.assertEquals(createdContractPage.getTextByField("Description"),
+                "Description");
+        softAssert.assertAll();
+
     }
 }
