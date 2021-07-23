@@ -27,7 +27,6 @@ hs_err_pid*
 /target/
 target/
 .settings/
-config.properties
 Maven.iml
 salesforce-g3.iml
 .classpath

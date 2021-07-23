@@ -1,10 +1,8 @@
 package salesforce.ui.pages.classic.contracts;
 
-import core.selenium.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.ui.pages.BasePage;
 
 public class ClassicNewContractPage extends BasePage {
@@ -52,7 +50,7 @@ public class ClassicNewContractPage extends BasePage {
      */
     @Override
     protected void waitForPageLoaded() {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(accountName));
+        webElementAction.waitForVisible(accountName);
     }
 
     /**

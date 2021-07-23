@@ -1,9 +1,7 @@
 package salesforce.ui.pages.classic.contracts;
 
-import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.ui.pages.BasePage;
 import salesforce.ui.pages.classic.ClassicHomePageObjects;
 
@@ -20,7 +18,7 @@ public class ClassicCreatedContractPage extends BasePage {
      */
     @Override
     protected void waitForPageLoaded() {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(addObjects));
+        webElementAction.waitForVisible(addObjects);
     }
 
     /**
@@ -29,7 +27,7 @@ public class ClassicCreatedContractPage extends BasePage {
      * @return a HomePageObjects.
      */
     public ClassicHomePageObjects clickAddObjects() {
-        addObjects.click();
+        webElementAction.clickField(addObjects);
         return new ClassicHomePageObjects();
     }
 
@@ -39,6 +37,6 @@ public class ClassicCreatedContractPage extends BasePage {
      * @return the text set on the account name assigned to a contract.
      */
     public String getAccountName() {
-        return accountName.getText();
+        return webElementAction.getTextOfElement(accountName);
     }
 }

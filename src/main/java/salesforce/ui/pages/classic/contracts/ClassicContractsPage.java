@@ -20,7 +20,7 @@ public class ClassicContractsPage extends BasePage {
      */
     @Override
     protected void waitForPageLoaded() {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(newContractButton));
+        webElementAction.waitForVisible(newContractButton);
     }
 
     /**
