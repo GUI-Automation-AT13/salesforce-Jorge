@@ -4,6 +4,8 @@ import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import salesforce.ui.pages.classic.ClassicHomePage;
+import salesforce.ui.pages.lightning.HomePage;
 
 public class LoginPage extends BasePage {
 
@@ -60,11 +62,23 @@ public class LoginPage extends BasePage {
      * @param password to be set.
      * @return the home page.
      */
+    public ClassicHomePage loginClassicSuccessful(final String userName, final String password) {
+        setUserName(userName);
+        setPassword(password);
+        clickLoginBtn();
+        return new ClassicHomePage();
+    }
+    /**
+     * login with successful values.
+     *
+     * @param userName to be set.
+     * @param password to be set.
+     * @return the home page.
+     */
     public HomePage loginSuccessful(final String userName, final String password) {
         setUserName(userName);
         setPassword(password);
         clickLoginBtn();
         return new HomePage();
     }
-
 }

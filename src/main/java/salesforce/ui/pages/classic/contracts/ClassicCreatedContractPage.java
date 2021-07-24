@@ -1,13 +1,11 @@
-package salesforce.ui.pages.contracts;
+package salesforce.ui.pages.classic.contracts;
 
-import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.ui.pages.BasePage;
-import salesforce.ui.pages.HomePageObjects;
+import salesforce.ui.pages.classic.ClassicHomePageObjects;
 
-public class CreatedContractPage extends BasePage {
+public class ClassicCreatedContractPage extends BasePage {
 
     @FindBy(css = "div[id*=\"ctrc7_ileinner\"]")
     private WebElement accountName;
@@ -20,7 +18,7 @@ public class CreatedContractPage extends BasePage {
      */
     @Override
     protected void waitForPageLoaded() {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(addObjects));
+        webElementAction.waitForVisible(addObjects);
     }
 
     /**
@@ -28,9 +26,9 @@ public class CreatedContractPage extends BasePage {
      *
      * @return a HomePageObjects.
      */
-    public HomePageObjects clickAddObjects() {
-        addObjects.click();
-        return new HomePageObjects();
+    public ClassicHomePageObjects clickAddObjects() {
+        webElementAction.clickField(addObjects);
+        return new ClassicHomePageObjects();
     }
 
     /**
@@ -39,6 +37,6 @@ public class CreatedContractPage extends BasePage {
      * @return the text set on the account name assigned to a contract.
      */
     public String getAccountName() {
-        return accountName.getText();
+        return webElementAction.getTextOfElement(accountName);
     }
 }

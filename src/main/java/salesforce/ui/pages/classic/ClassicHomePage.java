@@ -1,14 +1,13 @@
-package salesforce.ui.pages;
+package salesforce.ui.pages.classic;
 
-import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import salesforce.ui.pages.BasePage;
 
 /**
  * Initializes the Web elements.
  */
-public class HomePage extends BasePage {
+public class ClassicHomePage extends BasePage {
 
     @FindBy(css = ".allTabsArrow")
     private WebElement addObject;
@@ -18,7 +17,7 @@ public class HomePage extends BasePage {
      */
     @Override
     protected void waitForPageLoaded() {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(addObject));
+        webElementAction.waitForVisible(addObject);
     }
 
     /**
@@ -26,8 +25,8 @@ public class HomePage extends BasePage {
      *
      * @return a HomePageObjects.
      */
-    public HomePageObjects clickAddObject() {
+    public ClassicHomePageObjects clickAddObject() {
         addObject.click();
-        return new HomePageObjects();
+        return new ClassicHomePageObjects();
     }
 }

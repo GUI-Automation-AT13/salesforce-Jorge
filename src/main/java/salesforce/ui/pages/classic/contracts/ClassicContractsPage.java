@@ -1,4 +1,4 @@
-package salesforce.ui.pages.contracts;
+package salesforce.ui.pages.classic.contracts;
 
 import core.selenium.WebDriverManager;
 import org.openqa.selenium.By;
@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import salesforce.ui.pages.BasePage;
 
-public class ContractsPage extends BasePage {
+public class ClassicContractsPage extends BasePage {
 
     @FindBy(css = "input[title='New']")
     private WebElement newContractButton;
@@ -20,7 +20,7 @@ public class ContractsPage extends BasePage {
      */
     @Override
     protected void waitForPageLoaded() {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(newContractButton));
+        webElementAction.waitForVisible(newContractButton);
     }
 
     /**
@@ -35,9 +35,9 @@ public class ContractsPage extends BasePage {
      *
      * @return a new NewContractPage.
      */
-    public NewContractPage clickNew() {
+    public ClassicNewContractPage clickNew() {
         newContractButton.click();
-        return new NewContractPage();
+        return new ClassicNewContractPage();
     }
 
 }
