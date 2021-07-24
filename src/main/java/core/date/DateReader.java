@@ -11,7 +11,6 @@
 package core.date;
 
 import org.openqa.selenium.InvalidArgumentException;
-
 import java.util.Calendar;
 
 public class DateReader {

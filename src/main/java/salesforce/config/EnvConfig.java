@@ -8,7 +8,6 @@
 package salesforce.config;
 
 import core.utils.PropertiesReader;
-
 import java.util.Properties;
 
 /**

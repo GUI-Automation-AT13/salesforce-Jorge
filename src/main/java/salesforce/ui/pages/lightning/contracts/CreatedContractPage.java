@@ -3,7 +3,6 @@ package salesforce.ui.pages.lightning.contracts;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.ui.pages.BasePage;
-
 import java.util.HashMap;
 
 public class CreatedContractPage extends BasePage {

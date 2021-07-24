@@ -2,7 +2,6 @@ package api.salesforce;
 
 import api.salesforce.entities.Token;
 import core.utils.PropertiesReader;
-
 import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
