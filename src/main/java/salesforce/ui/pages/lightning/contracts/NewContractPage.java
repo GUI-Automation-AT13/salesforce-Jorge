@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.ui.pages.BasePage;
 
+import java.util.HashMap;
+
 public class NewContractPage extends BasePage {
     @FindBy(css = "input[placeholder='Search Accounts...']")
     private WebElement accountName;
@@ -28,7 +30,7 @@ public class NewContractPage extends BasePage {
     @FindBy(css = ".select[aria-required='false']")
     private WebElement ownerExpirationNotice;
     @FindBy(linkText = "15 Days")
-    private WebElement ownerExpirationNoticeSelector;
+    private static HashMap<String, String> ownerExpirationNoticeSelector = new HashMap<>();
     @FindBy(xpath = "(//div/input[@class = ' input'])[4]")
     private WebElement companySignedDate;
     @FindBy(css = "textarea[placeholder='Billing Street']")
@@ -52,6 +54,15 @@ public class NewContractPage extends BasePage {
     @FindBy(css = "button[title='Cancel']")
     private WebElement cancel;
 
+    static {
+        ownerExpirationNoticeSelector.put("15 Days", "15 Days");
+        ownerExpirationNoticeSelector.put("30 Days", "30 Days");
+        ownerExpirationNoticeSelector.put("45 Days", "45 Days");
+        ownerExpirationNoticeSelector.put("60 Days", "60 Days");
+        ownerExpirationNoticeSelector.put("90 Days", "90 Days");
+        ownerExpirationNoticeSelector.put("120 Days", "120 Days");
+    }
+
     /**
      * Waits for the page to be loaded.
      */
@@ -63,7 +74,7 @@ public class NewContractPage extends BasePage {
     /**
      * Sets the account name on a contract.
      *
-     * @param newAccountName
+     * @param newAccountName .
      */
     public void setAccountName(final String newAccountName) {
         webElementAction.setInputField(this.accountName, newAccountName);
@@ -84,6 +95,7 @@ public class NewContractPage extends BasePage {
     public void setCustomerSignedBy(final String newCustomerSignedBy) {
         webElementAction.setInputField(this.customerSignedBy, newCustomerSignedBy);
     }
+
     /**
      * Selects the contact name on a contract.
      */
@@ -117,6 +129,7 @@ public class NewContractPage extends BasePage {
     public void setPriceBook(final String newPriceBook) {
         webElementAction.setInputField(this.priceBook, newPriceBook);
     }
+
     /**
      * Sets the priceBook element.
      */
@@ -148,12 +161,16 @@ public class NewContractPage extends BasePage {
     public void clickOwnerExpirationNotice() {
         webElementAction.clickField(this.ownerExpirationNotice);
     }
+
     /**
      * Sets the ownerExpirationNotice element on the selector.
+     *
+     * @param value for the xpath
      */
-    public void selectOwnerExpirationNotice() {
-        webElementAction.clickField(this.ownerExpirationNoticeSelector);
+    public void selectOwnerExpirationNotice(final String value) {
+        webElementAction.clickFieldByLocator(ownerExpirationNoticeSelector.get(value));
     }
+
     /**
      * Sets the companySignedDate element.
      *

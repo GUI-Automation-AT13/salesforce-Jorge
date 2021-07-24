@@ -17,6 +17,25 @@ public class Contact {
     private String firstName;
     @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     private String name;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    private String email;
+
+    /**
+     * Gets the email.
+     *
+     * @return the email.
+     */
+    public String getEmail() {
+        return email;
+    }
+    /**
+     * Sets the newEmail.
+     *
+     * @param newEmail to be set.
+     */
+    public void setEmail(final String newEmail) {
+        this.email = newEmail;
+    }
 
     /**
      * Gets the Id.

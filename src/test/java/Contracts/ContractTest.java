@@ -33,7 +33,7 @@ public class ContractTest extends ContractBaseTest {
         newContractPage.setPriceBook("Standard");
         newContractPage.selectPriceBook();
         newContractPage.clickOwnerExpirationNotice();
-        newContractPage.selectOwnerExpirationNotice();
+        newContractPage.selectOwnerExpirationNotice("30 Days");
         newContractPage.setCompanySignedDate("7/19/2021");
         newContractPage.setBillingStreet("Billing Street");
         newContractPage.setBillingCity("Billing City");
@@ -60,7 +60,7 @@ public class ContractTest extends ContractBaseTest {
         softAssert.assertEquals(createdContractPage.getTextByField("Price Book"),
                 "Standard");
         softAssert.assertEquals(createdContractPage.getTextByField("Owner Expiration Notice"),
-                "15 Days");
+                "30 Days");
         softAssert.assertEquals(createdContractPage.getTextByField("Company Signed Date"),
                 "7/19/2021");
         softAssert.assertEquals(createdContractPage.getTextByField("Special Terms"),

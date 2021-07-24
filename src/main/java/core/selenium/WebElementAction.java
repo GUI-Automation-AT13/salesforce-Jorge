@@ -47,6 +47,16 @@ public class WebElementAction {
         WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
         webElement.click();
     }
+    /**
+     * Clicks a webElement.
+     *
+     * @param locator is what we want to click.
+     */
+    public void clickFieldByLocator(final String locator) {
+        WebDriverManager.getInstance().getWait()
+                .until(ExpectedConditions.elementToBeClickable(By.linkText(locator)));
+        WebDriverManager.getInstance().getWebDriver().findElement(By.linkText(locator)).click();
+    }
 
     /**
      * Scrolls to the end of the page.
