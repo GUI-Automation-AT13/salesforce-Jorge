@@ -5,7 +5,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.asserts.SoftAssert;
 import salesforce.config.EnvConfig;
-import salesforce.ui.PageTransporter;
+import salesforce.ui.utils.PageTransporter;
 
 public class BaseTests {
     public PageTransporter pageTransporter = new PageTransporter();

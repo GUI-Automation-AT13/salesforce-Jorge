@@ -56,6 +56,14 @@ public class WebDriverManager {
         webDriver.close();
     }
     /**
+     * Closes the web driver.
+     */
+    public void resetWebDriver() {
+        webDriver.manage().deleteAllCookies();
+        webDriver.quit();
+        initialize();
+    }
+    /**
      * Returns a webDriverManager instance.
      *
      * @return a webDriverManager.
