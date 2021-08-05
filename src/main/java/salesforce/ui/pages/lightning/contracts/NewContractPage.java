@@ -1,5 +1,6 @@
 package salesforce.ui.pages.lightning.contracts;
 
+import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.ui.pages.BasePage;
@@ -61,6 +62,15 @@ public class NewContractPage extends BasePage {
         ownerExpirationNoticeSelector.put("60 Days", "60 Days");
         ownerExpirationNoticeSelector.put("90 Days", "90 Days");
         ownerExpirationNoticeSelector.put("120 Days", "120 Days");
+    }
+
+    /**
+     * Initializes the elements and wait for page to be loaded.
+     *
+     * @param newWebDriverManager to be managed.
+     */
+    public NewContractPage(final WebDriverManager newWebDriverManager) {
+        super(newWebDriverManager);
     }
 
     /**
@@ -253,8 +263,8 @@ public class NewContractPage extends BasePage {
      * @return a CreatedContractPage.
      */
     public CreatedContractPage clickSave() {
-        this.save.click();
-        return new CreatedContractPage();
+        webElementAction.clickField(save);
+        return new CreatedContractPage(webDriverManager);
     }
 
     /**
@@ -264,7 +274,7 @@ public class NewContractPage extends BasePage {
      */
     public NewContractPage clickSaveAndNew() {
         this.saveAndNew.click();
-        return new NewContractPage();
+        return new NewContractPage(webDriverManager);
     }
 
     /**
@@ -274,7 +284,7 @@ public class NewContractPage extends BasePage {
      */
     public ContractsPage clickCancel() {
         this.cancel.click();
-        return new ContractsPage();
+        return new ContractsPage(webDriverManager);
     }
 
     /**

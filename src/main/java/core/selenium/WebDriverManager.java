@@ -19,7 +19,6 @@ public class WebDriverManager {
     private WebDriverConfig webDriverConfig = WebDriverConfig.getInstance();
     private WebDriver webDriver;
     private WebDriverWait wait;
-    private static WebDriverManager instance = null;
 
     /**
      * Initializes the web driver configuration configuration.
@@ -62,17 +61,6 @@ public class WebDriverManager {
         webDriver.manage().deleteAllCookies();
         webDriver.quit();
         initialize();
-    }
-    /**
-     * Returns a webDriverManager instance.
-     *
-     * @return a webDriverManager.
-     */
-    public static WebDriverManager getInstance() {
-        if (instance == null || instance.webDriver == null) {
-            instance = new WebDriverManager();
-        }
-        return instance;
     }
     /**
      * Initializes the webDriverManager configuration.

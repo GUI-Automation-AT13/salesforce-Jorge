@@ -17,6 +17,16 @@ public class PageTransporter {
 
     private String baseUrl = EnvConfig.getInstance().getBaseUrl();
     private String featureUrl = "lightning/o/%s/list?filterName=Recent";
+    private WebDriverManager webDriverManager;
+
+    /**
+     * Goes directly to a page by an url.
+     *
+     * @param newWebDriverManager to go.
+     */
+    public PageTransporter(final WebDriverManager newWebDriverManager) {
+        this.webDriverManager = newWebDriverManager;
+    }
 
     /**
      * Goes directly to a page by an url.
@@ -24,8 +34,8 @@ public class PageTransporter {
      * @param url to go.
      */
     public void goToURL(final String url) {
-        WebDriverManager.getInstance().getWebDriver().navigate().to(url);
-        WebDriverManager.getInstance().getWebDriver().manage().window().maximize();
+        webDriverManager.getWebDriver().navigate().to(url);
+        webDriverManager.getWebDriver().manage().window().maximize();
     }
 
     /**
@@ -35,7 +45,7 @@ public class PageTransporter {
      */
     public ClassicContractsPage navigateToContractsPage() {
         goToURL(baseUrl.concat("800/o"));
-        return new ClassicContractsPage();
+        return new ClassicContractsPage(webDriverManager);
     }
 
     /**
@@ -45,7 +55,7 @@ public class PageTransporter {
      */
     public ContractsPage navigateToContractsPageLightning() {
         goToURL(baseUrl.concat("lightning/o/Contract/list?filterName=Recent"));
-        return new ContractsPage();
+        return new ContractsPage(webDriverManager);
     }
 
     /**
@@ -64,6 +74,6 @@ public class PageTransporter {
      */
     public LoginPage navigateToLoginPage() {
         goToURL(baseUrl);
-        return new LoginPage();
+        return new LoginPage(webDriverManager);
     }
 }

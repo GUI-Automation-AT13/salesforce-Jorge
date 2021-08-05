@@ -1,10 +1,10 @@
 package salesforce.ui.pages.lightning.contracts;
 
+import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.ui.pages.BasePage;
 import salesforce.ui.utils.GetString;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +67,15 @@ public class CreatedContractPage extends BasePage {
         XPATH_COMPLEMENTS.put("Company Signed Date", "//button/preceding-sibling::span");
         XPATH_COMPLEMENTS.put("Special Terms", "//span//span");
         XPATH_COMPLEMENTS.put("Description", "//span//span");
+    }
+
+    /**
+     * Initializes the elements and wait for page to be loaded.
+     *
+     * @param newWebDriverManager to be managed.
+     */
+    public CreatedContractPage(final WebDriverManager newWebDriverManager) {
+        super(newWebDriverManager);
     }
 
     /**

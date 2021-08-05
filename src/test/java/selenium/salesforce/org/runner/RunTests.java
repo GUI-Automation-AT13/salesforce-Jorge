@@ -11,7 +11,6 @@ import api.salesforce.entities.Contact;
 import api.salesforce.entities.Response;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import core.selenium.WebDriverManager;
 import core.utils.PropertiesReader;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
@@ -35,7 +34,11 @@ public class RunTests extends AbstractTestNGCucumberTests {
     public Authentication authentication = new Authentication();
     public Account account;
     public Contact contact;
-
+    @Override
+    @DataProvider(parallel = true)
+    public Object[][] scenarios(){
+        return super.scenarios();
+    }
     @BeforeClass
     public void loginAndSetup() throws JsonProcessingException {
         apiRequest = new ApiRequest();
@@ -47,7 +50,6 @@ public class RunTests extends AbstractTestNGCucumberTests {
                         + properties.getProperty("VERSION"));
         createAccount();
         createContact();
-        setUp();
     }
 
     @AfterTest
@@ -55,7 +57,6 @@ public class RunTests extends AbstractTestNGCucumberTests {
         deleteAccount();
         deleteContact();
         apiRequest = new ApiRequest();
-        tearDown();
     }
 
     public void createAccount() throws JsonProcessingException {
@@ -110,10 +111,5 @@ public class RunTests extends AbstractTestNGCucumberTests {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
         apiResponse.getResponse().then().log().body();
     }
-    public void setUp() {
-        WebDriverManager.getInstance().getWebDriver();
-    }
-    public void tearDown() {
-        WebDriverManager.getInstance().quitWebDriver();
-    }
+
 }

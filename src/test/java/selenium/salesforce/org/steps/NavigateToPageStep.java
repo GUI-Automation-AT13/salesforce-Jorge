@@ -1,16 +1,16 @@
 package selenium.salesforce.org.steps;
 
+import core.selenium.WebDriverManager;
 import io.cucumber.java.en.And;
-import org.testng.asserts.SoftAssert;
 import salesforce.ui.utils.PageTransporter;
 
 public class NavigateToPageStep {
+    public WebDriverManager webDriverManager;
     public PageTransporter pageTransporter;
-    public SoftAssert softAssert;
 
-    public NavigateToPageStep(PageTransporter pageTransporter, SoftAssert softAssert) {
-        this.pageTransporter = pageTransporter;
-        this.softAssert = softAssert;
+    public NavigateToPageStep(final WebDriverManager newWebDriverManager) {
+        this.webDriverManager = newWebDriverManager;
+        this.pageTransporter = new PageTransporter(webDriverManager);
     }
 
     @And("I navigate to the {string} page")
