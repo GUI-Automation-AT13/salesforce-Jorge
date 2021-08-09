@@ -53,16 +53,26 @@ public class WebElementAction {
      *
      * @param webElement is what we want to click.
      */
-    public void clickField(final WebElement webElement) {
+    public void clickElement(final WebElement webElement) {
         waitForVisible(webElement);
         webElement.click();
     }
     /**
      * Clicks a webElement.
      *
+     * @param newLocator is what we want to click.
+     */
+    public void clickElementByLocator(final By newLocator) {
+        webDriverManager.getWait()
+                .until(ExpectedConditions.elementToBeClickable(newLocator));
+        webDriverManager.getWebDriver().findElement(newLocator);
+    }
+    /**
+     * Clicks a webElement.
+     *
      * @param locator is what we want to click.
      */
-    public void clickFieldByLocator(final String locator) {
+    public void clickFieldByLinkText(final String locator) {
         webDriverManager.getWait()
                 .until(ExpectedConditions.elementToBeClickable(By.linkText(locator)));
         webDriverManager.getWebDriver().findElement(By.linkText(locator)).click();
@@ -71,7 +81,7 @@ public class WebElementAction {
     /**
      * Scrolls to the end of the page.
      */
-    public void dropDownTillTheEnd() {
+    public void scrollToBottom() {
         JavascriptExecutor jse = (JavascriptExecutor) webDriverManager.getWebDriver();
         jse.executeScript("window.scrollBy(0,250)");
     }

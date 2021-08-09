@@ -8,7 +8,7 @@
  *
  * @author Jorge Rodrigo Cáceres Velasco
  */
-package core.date;
+package core.utils.date;
 
 import org.openqa.selenium.InvalidArgumentException;
 import java.text.ParseException;

@@ -37,7 +37,7 @@ public class ClassicCreatedContractPage extends BasePage {
      * @return a HomePageObjects.
      */
     public ClassicHomePageObjects clickAddObjects() {
-        webElementAction.clickField(addObjects);
+        webElementAction.clickElement(addObjects);
         return new ClassicHomePageObjects(webDriverManager);
     }
 
