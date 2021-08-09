@@ -31,7 +31,7 @@ public class ContractsPage extends BasePage {
      * @return a ProductPage instance
      */
     public NewContractPage clickNewContractButton() {
-        webElementAction.clickField(newContractButton);
+        webElementAction.clickElement(newContractButton);
         return new NewContractPage(webDriverManager);
     }
 }

@@ -69,7 +69,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newAccountName
      */
     public void setAccountName(final String newAccountName) {
-        this.accountName.sendKeys(newAccountName);
+        webElementAction.setInputField(accountName, newAccountName);
     }
 
     /**
@@ -78,7 +78,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newCustomerSignedBy to be typed.
      */
     public void setCustomerSignedBy(final String newCustomerSignedBy) {
-        this.customerSignedBy.sendKeys(newCustomerSignedBy);
+        webElementAction.setInputField(customerSignedBy, newCustomerSignedBy);
     }
 
     /**
@@ -87,7 +87,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newCustomerSignedTittle to be typed.
      */
     public void setCustomerSignedTittle(final String newCustomerSignedTittle) {
-        this.customerSignedTittle.sendKeys(newCustomerSignedTittle);
+        webElementAction.setInputField(customerSignedTittle, newCustomerSignedTittle);
     }
 
     /**
@@ -96,7 +96,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newCustomerSignedDate to be typed.
      */
     public void setCustomerSignedDate(final String newCustomerSignedDate) {
-        this.customerSignedDate.sendKeys(newCustomerSignedDate);
+        webElementAction.setInputField(customerSignedDate, newCustomerSignedDate);
     }
 
     /**
@@ -105,10 +105,8 @@ public class ClassicNewContractPage extends BasePage {
      * @param newPriceBook to be typed.
      */
     public void setPriceBook(final String newPriceBook) {
-        if (newPriceBook == "Standandar") {
-            this.priceBook.click();
-            priceBook.findElement(By.xpath("//option[. = 'Standard']")).click();
-        }
+        webElementAction.clickElement(priceBook);
+        webElementAction.clickElementByLocator(By.xpath("//option[. = '" + newPriceBook + "']"));
     }
 
     /**
@@ -117,7 +115,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newContractStartDate to be typed.
      */
     public void setContractStartDate(final String newContractStartDate) {
-        this.contractStartDate.sendKeys(newContractStartDate);
+        webElementAction.setInputField(contractStartDate, newContractStartDate);
     }
 
     /**
@@ -126,7 +124,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newContractTermMonths to be typed.
      */
     public void setContractTermMonths(final String newContractTermMonths) {
-        this.contractTermMonths.sendKeys(newContractTermMonths);
+        webElementAction.setInputField(contractTermMonths, newContractTermMonths);
     }
 
     /**
@@ -135,23 +133,8 @@ public class ClassicNewContractPage extends BasePage {
      * @param newOwnerExpirationNotice to be typed.
      */
     public void setOwnerExpirationNotice(final String newOwnerExpirationNotice) {
-        this.ownerExpirationNotice.click();
-        switch (newOwnerExpirationNotice) {
-            case "15 Days":
-                ownerExpirationNotice.findElement(By.xpath("//option[. = '15 Days']")).click();
-            case "30 Days":
-                ownerExpirationNotice.findElement(By.xpath("//option[. = '30 Days']")).click();
-            case "45 Days":
-                ownerExpirationNotice.findElement(By.xpath("//option[. = '45 Days']")).click();
-            case "60 Days":
-                ownerExpirationNotice.findElement(By.xpath("//option[. = '60 Days']")).click();
-            case "90 Days":
-                ownerExpirationNotice.findElement(By.xpath("//option[. = '90 Days']")).click();
-            case "120 Days":
-                ownerExpirationNotice.findElement(By.xpath("//option[. = '120 Days']")).click();
-            default:
-                break;
-        }
+        webElementAction.clickElement(ownerExpirationNotice);
+        webElementAction.clickElementByLocator(By.xpath("//option[. = '" + newOwnerExpirationNotice + "']"));
     }
 
     /**
@@ -160,7 +143,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newCompanySignedDate to be typed.
      */
     public void setCompanySignedDate(final String newCompanySignedDate) {
-        this.companySignedDate.sendKeys(newCompanySignedDate);
+        webElementAction.setInputField(companySignedDate, newCompanySignedDate);
     }
 
     /**
@@ -169,7 +152,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newBillingStreet to be typed.
      */
     public void setBillingStreet(final String newBillingStreet) {
-        this.billingStreet.sendKeys(newBillingStreet);
+        webElementAction.setInputField(billingStreet, newBillingStreet);
     }
 
     /**
@@ -178,7 +161,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newBillingCity to be typed.
      */
     public void setBillingCity(final String newBillingCity) {
-        this.billingCity.sendKeys(newBillingCity);
+        webElementAction.setInputField(billingCity, newBillingCity);
     }
 
     /**
@@ -187,7 +170,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newBillingState to be typed.
      */
     public void setBillingState(final String newBillingState) {
-        this.billingState.sendKeys(newBillingState);
+        webElementAction.setInputField(billingState, newBillingState);
     }
 
     /**
@@ -196,7 +179,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newBillingPostalCode to be typed.
      */
     public void setBillingPostalCode(final String newBillingPostalCode) {
-        this.billingPostalCode.sendKeys(newBillingPostalCode);
+        webElementAction.setInputField(billingPostalCode, newBillingPostalCode);
     }
 
     /**
@@ -205,7 +188,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newBillingCountry to be typed.
      */
     public void setBillingCountry(final String newBillingCountry) {
-        this.billingCountry.sendKeys(newBillingCountry);
+        webElementAction.setInputField(billingCountry, newBillingCountry);
     }
 
     /**
@@ -214,7 +197,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newSpecialTerms to be typed.
      */
     public void setSpecialTerms(final String newSpecialTerms) {
-        this.specialTerms.sendKeys(newSpecialTerms);
+        webElementAction.setInputField(specialTerms, newSpecialTerms);
     }
 
     /**
@@ -223,7 +206,7 @@ public class ClassicNewContractPage extends BasePage {
      * @param newDescription to be typed.
      */
     public void setDescription(final String newDescription) {
-        this.description.sendKeys(newDescription);
+        webElementAction.setInputField(description, newDescription);
     }
 
     /**
@@ -232,7 +215,7 @@ public class ClassicNewContractPage extends BasePage {
      * @return a CreatedContractPage.
      */
     public ClassicCreatedContractPage clickSave() {
-        this.save.click();
+        webElementAction.clickElement(save);
         return new ClassicCreatedContractPage(webDriverManager);
     }
 
@@ -242,7 +225,7 @@ public class ClassicNewContractPage extends BasePage {
      * @return a NewContractPage.
      */
     public ClassicNewContractPage clickSaveAndNew() {
-        this.saveAndNew.click();
+        webElementAction.clickElement(saveAndNew);
         return new ClassicNewContractPage(webDriverManager);
     }
 
@@ -252,7 +235,7 @@ public class ClassicNewContractPage extends BasePage {
      * @return a ContractsPage.
      */
     public ClassicContractsPage clickCancel() {
-        this.cancel.click();
+        webElementAction.clickElement(cancel);
         return new ClassicContractsPage(webDriverManager);
     }
 

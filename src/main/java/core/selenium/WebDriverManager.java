@@ -43,7 +43,7 @@ public class WebDriverManager {
         return wait;
     }
     /**
-     * Quit the web driver.
+     * Quits the web driver.
      */
     public void quitWebDriver() {
         webDriver.quit();

@@ -84,8 +84,8 @@ public class CreatedContractPage extends BasePage {
      * @return the text set on the account name assigned to a contract.
      */
     public CreatedContractPage clickDetails() {
-        webElementAction.clickField(details);
-        webElementAction.dropDownTillTheEnd();
+        webElementAction.clickElement(details);
+        webElementAction.scrollToBottom();
         return this;
     }
     /**
@@ -135,8 +135,8 @@ public class CreatedContractPage extends BasePage {
      * @return a map with methods of CreatedWorkType
      */
     private HashMap<String, GetString> getTxtFields() {
-        webElementAction.clickField(details);
-        webElementAction.dropDownTillTheEnd();
+        webElementAction.clickElement(details);
+        webElementAction.scrollToBottom();
         HashMap<String, GetString> mapValues = new HashMap<>();
         mapValues.put("Account Name", () -> getTextByField("Account Name"));
         mapValues.put("Contract Term (months)", () -> getTextByField("Contract Term (months)"));

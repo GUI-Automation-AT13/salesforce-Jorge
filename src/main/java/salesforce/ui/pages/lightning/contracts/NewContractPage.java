@@ -30,8 +30,6 @@ public class NewContractPage extends BasePage {
     private WebElement contractTermMonths;
     @FindBy(css = ".select[aria-required='false']")
     private WebElement ownerExpirationNotice;
-    @FindBy(linkText = "15 Days")
-    private static HashMap<String, String> ownerExpirationNoticeSelector = new HashMap<>();
     @FindBy(xpath = "(//div/input[@class = ' input'])[4]")
     private WebElement companySignedDate;
     @FindBy(css = "textarea[placeholder='Billing Street']")
@@ -54,16 +52,6 @@ public class NewContractPage extends BasePage {
     private WebElement saveAndNew;
     @FindBy(css = "button[title='Cancel']")
     private WebElement cancel;
-
-    static {
-        ownerExpirationNoticeSelector.put("15 Days", "15 Days");
-        ownerExpirationNoticeSelector.put("30 Days", "30 Days");
-        ownerExpirationNoticeSelector.put("45 Days", "45 Days");
-        ownerExpirationNoticeSelector.put("60 Days", "60 Days");
-        ownerExpirationNoticeSelector.put("90 Days", "90 Days");
-        ownerExpirationNoticeSelector.put("120 Days", "120 Days");
-    }
-
     /**
      * Initializes the elements and wait for page to be loaded.
      *
@@ -95,7 +83,7 @@ public class NewContractPage extends BasePage {
      * Selects the account name on a contract.
      */
     public void clickAccountSelector() {
-        webElementAction.clickField(this.accountSelector);
+        webElementAction.clickElement(this.accountSelector);
     }
 
     /**
@@ -112,7 +100,7 @@ public class NewContractPage extends BasePage {
      * Selects the contact name on a contract.
      */
     public void clickContactSelector() {
-        webElementAction.clickField(this.contactSelector);
+        webElementAction.clickElement(this.contactSelector);
     }
 
     /**
@@ -147,7 +135,7 @@ public class NewContractPage extends BasePage {
      * Sets the priceBook element.
      */
     public void selectPriceBook() {
-        webElementAction.clickField(this.priceBookSelector);
+        webElementAction.clickElement(this.priceBookSelector);
     }
 
     /**
@@ -172,7 +160,7 @@ public class NewContractPage extends BasePage {
      * Sets the ownerExpirationNotice element.
      */
     public void clickOwnerExpirationNotice() {
-        webElementAction.clickField(this.ownerExpirationNotice);
+        webElementAction.clickElement(this.ownerExpirationNotice);
     }
 
     /**
@@ -182,7 +170,7 @@ public class NewContractPage extends BasePage {
      */
     public void selectOwnerExpirationNotice(final String value) {
         clickOwnerExpirationNotice();
-        webElementAction.clickFieldByLocator(ownerExpirationNoticeSelector.get(value));
+        webElementAction.clickFieldByLinkText(value);
     }
 
     /**
@@ -263,7 +251,7 @@ public class NewContractPage extends BasePage {
      * @return a CreatedContractPage.
      */
     public CreatedContractPage clickSave() {
-        webElementAction.clickField(save);
+        webElementAction.clickElement(save);
         return new CreatedContractPage(webDriverManager);
     }
 

@@ -1,6 +1,6 @@
 package unittests;
 
-import core.date.DateManager;
+import core.utils.date.DateManager;
 import org.openqa.selenium.InvalidArgumentException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;

@@ -33,7 +33,7 @@ checkstyle {
 }
 pitest {
     testPlugin='testng'
-    targetClasses = ['core.date*']
+    targetClasses = ['core.utils.date*']
     targetTests = ['unittests.*']
     threads = 4
     outputFormats = ['XML', 'HTML']

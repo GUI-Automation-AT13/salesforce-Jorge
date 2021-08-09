@@ -35,7 +35,7 @@ public class ClassicHomePage extends BasePage {
      *
      * @return a HomePageObjects.
      */
-    public ClassicHomePageObjects clickAddObject() {
+    public ClassicHomePageObjects clickAddObjectBtn() {
         addObject.click();
         return new ClassicHomePageObjects(webDriverManager);
     }
