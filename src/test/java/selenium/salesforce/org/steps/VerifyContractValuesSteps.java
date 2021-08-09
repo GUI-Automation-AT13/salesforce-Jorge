@@ -3,6 +3,7 @@ package selenium.salesforce.org.steps;
 import core.selenium.WebDriverManager;
 import io.cucumber.java.en.Then;
 import org.testng.asserts.SoftAssert;
+import salesforce.ui.pages.lightning.contracts.ContractDetails;
 import salesforce.ui.pages.lightning.contracts.CreatedContractPage;
 
 import java.util.ArrayList;
@@ -12,18 +13,21 @@ import java.util.Map;
 public class VerifyContractValuesSteps {
     private WebDriverManager webDriverManager;
     private CreatedContractPage createdContractPage;
+    private ContractDetails contractDetails;
+    private Map<String,String> dataMap;
     public SoftAssert softAssert;
 
-    public VerifyContractValuesSteps(final WebDriverManager newWebDriverManager) {
+    public VerifyContractValuesSteps(final WebDriverManager newWebDriverManager, final SoftAssert newSoftAssert) {
         this.webDriverManager = newWebDriverManager;
-        this.softAssert = new SoftAssert();
+        this.softAssert = newSoftAssert;
     }
 
     @Then("I verify the Contract created with the set fields")
     public void iVerifyTheContractCreatedWithTheSetFields(final Map<String, String> table) {
+        dataMap = table;
         createdContractPage = new CreatedContractPage(webDriverManager);
-        List<String> valuesField = createdContractPage.getValueField(table);
-        softAssert.assertEquals(valuesField, new ArrayList<>(table.values()));
-        softAssert.assertAll();
+        contractDetails = createdContractPage.clickDetails();
+        List<String> valuesField = contractDetails.getDetailsList(dataMap);
+        softAssert.assertEquals(valuesField, new ArrayList<>(dataMap.values()));
     }
 }

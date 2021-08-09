@@ -16,10 +16,10 @@ public class CreateContractSteps {
     ContractsPage contractsPage;
     NewContractPage newContractPage;
 
-    public CreateContractSteps(final WebDriverManager newWebDriverManager) {
+    public CreateContractSteps(final WebDriverManager newWebDriverManager, final SoftAssert newSoftAssert) {
         this.webDriverManager = newWebDriverManager;
         this.pageTransporter = new PageTransporter(webDriverManager);
-        this.softAssert = new SoftAssert();
+        this.softAssert = newSoftAssert;
     }
 
     @When("I create a new contract with required fields")
