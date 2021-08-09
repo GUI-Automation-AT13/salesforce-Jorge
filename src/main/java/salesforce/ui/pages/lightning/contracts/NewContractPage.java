@@ -1,9 +1,11 @@
 package salesforce.ui.pages.lightning.contracts;
 
+import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.ui.pages.BasePage;
 import java.util.HashMap;
+import java.util.Map;
 
 public class NewContractPage extends BasePage {
     @FindBy(css = "input[placeholder='Search Accounts...']")
@@ -63,6 +65,15 @@ public class NewContractPage extends BasePage {
     }
 
     /**
+     * Initializes the elements and wait for page to be loaded.
+     *
+     * @param newWebDriverManager to be managed.
+     */
+    public NewContractPage(final WebDriverManager newWebDriverManager) {
+        super(newWebDriverManager);
+    }
+
+    /**
      * Waits for the page to be loaded.
      */
     @Override
@@ -77,6 +88,7 @@ public class NewContractPage extends BasePage {
      */
     public void setAccountName(final String newAccountName) {
         webElementAction.setInputField(this.accountName, newAccountName);
+        clickAccountSelector();
     }
 
     /**
@@ -93,6 +105,7 @@ public class NewContractPage extends BasePage {
      */
     public void setCustomerSignedBy(final String newCustomerSignedBy) {
         webElementAction.setInputField(this.customerSignedBy, newCustomerSignedBy);
+        clickContactSelector();
     }
 
     /**
@@ -127,6 +140,7 @@ public class NewContractPage extends BasePage {
      */
     public void setPriceBook(final String newPriceBook) {
         webElementAction.setInputField(this.priceBook, newPriceBook);
+        selectPriceBook();
     }
 
     /**
@@ -167,6 +181,7 @@ public class NewContractPage extends BasePage {
      * @param value for the xpath
      */
     public void selectOwnerExpirationNotice(final String value) {
+        clickOwnerExpirationNotice();
         webElementAction.clickFieldByLocator(ownerExpirationNoticeSelector.get(value));
     }
 
@@ -248,8 +263,8 @@ public class NewContractPage extends BasePage {
      * @return a CreatedContractPage.
      */
     public CreatedContractPage clickSave() {
-        this.save.click();
-        return new CreatedContractPage();
+        webElementAction.clickField(save);
+        return new CreatedContractPage(webDriverManager);
     }
 
     /**
@@ -259,7 +274,7 @@ public class NewContractPage extends BasePage {
      */
     public NewContractPage clickSaveAndNew() {
         this.saveAndNew.click();
-        return new NewContractPage();
+        return new NewContractPage(webDriverManager);
     }
 
     /**
@@ -269,6 +284,47 @@ public class NewContractPage extends BasePage {
      */
     public ContractsPage clickCancel() {
         this.cancel.click();
-        return new ContractsPage();
+        return new ContractsPage(webDriverManager);
+    }
+
+    /**
+     * Saves actions in New work type page in map.
+     *
+     * @param table is map
+     */
+    public void fillUpField(final Map<String, String> table) {
+        HashMap<String, Runnable> actionsContractMap = mapActionsContract(table);
+        table.keySet().forEach(key -> actionsContractMap.get(key).run());
+    }
+
+    /**
+     * Saves actions in New work type page in map.
+     *
+     * @param contractMap is map
+     * @return a map with action of fields
+     */
+    private HashMap<String, Runnable> mapActionsContract(final Map<String, String> contractMap) {
+        HashMap<String, Runnable> mapActions = new HashMap<>();
+        mapActions.put("Account Name", () -> setAccountName(contractMap.get("Account Name")));
+        mapActions.put("Contract Term (months)", () -> setContractTermMonths(contractMap
+                .get("Contract Term (months)")));
+        mapActions.put("Contract Start Date", () -> setContractStartDate(contractMap.get("Contract Start Date")));
+        mapActions.put("Customer Signed By", () -> setCustomerSignedBy(contractMap.get("Customer Signed By")));
+        mapActions.put("Customer Signed Title", () -> setCustomerSignedTittle(contractMap
+                .get("Customer Signed Title")));
+        mapActions.put("Customer Signed Date", () -> setCustomerSignedDate(contractMap
+                .get("Customer Signed Date")));
+        mapActions.put("Price Book", () -> setPriceBook(contractMap.get("Price Book")));
+        mapActions.put("Owner Expiration Notice", () -> selectOwnerExpirationNotice(contractMap
+                .get("Owner Expiration Notice")));
+        mapActions.put("Company Signed Date", () -> setCompanySignedDate(contractMap.get("Company Signed Date")));
+        mapActions.put("Billing Street", () -> setBillingStreet(contractMap.get("Billing Street")));
+        mapActions.put("Billing City", () -> setBillingCity(contractMap.get("Billing City")));
+        mapActions.put("Billing state", () -> setBillingState(contractMap.get("Billing state")));
+        mapActions.put("Billing postal code", () -> setBillingPostalCode(contractMap.get("Billing postal code")));
+        mapActions.put("Billing country", () -> setBillingCountry(contractMap.get("Billing country")));
+        mapActions.put("Special Terms", () -> setSpecialTerms(contractMap.get("Special Terms")));
+        mapActions.put("Description", () -> setDescription(contractMap.get("Description")));
+        return mapActions;
     }
 }

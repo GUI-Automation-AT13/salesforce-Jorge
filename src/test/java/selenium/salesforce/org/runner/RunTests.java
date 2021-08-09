@@ -1,4 +1,4 @@
-package base;
+package selenium.salesforce.org.runner;
 
 import api.ApiManager;
 import api.ApiMethod;
@@ -8,30 +8,42 @@ import api.salesforce.ApiEndPoints;
 import api.salesforce.Authentication;
 import api.salesforce.entities.Account;
 import api.salesforce.entities.Contact;
+import api.salesforce.entities.PriceBook;
 import api.salesforce.entities.Response;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.utils.PropertiesReader;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
+
 import java.util.Properties;
 
 import static api.salesforce.Authentication.token;
 
-public class ContractBaseTest extends BaseTests {
+@CucumberOptions(
+        features = {"src/test/resources/features"},
+        plugin = {"html:target/site/cucumber-pretty.html", "json:target/cucumber.json"},
+        glue = {"selenium.salesforce.org"}
+)
+public class RunTests extends AbstractTestNGCucumberTests {
     public ApiRequest apiRequest;
     public ApiResponse apiResponse;
     public Authentication authentication = new Authentication();
     public Account account;
     public Contact contact;
+    public PriceBook priceBook;
 
+    @Override
+    @DataProvider(parallel = false)
+    public Object[][] scenarios(){
+        return super.scenarios();
+    }
     @BeforeClass
-    public void loginAndSetup() {
+    public void loginAndSetup() throws JsonProcessingException {
         apiRequest = new ApiRequest();
         Properties properties = PropertiesReader.getProperties("config.properties");
         authentication.getAuth();
@@ -39,9 +51,21 @@ public class ContractBaseTest extends BaseTests {
                 .addHeader(HttpHeaders.AUTHORIZATION, token.getTokenType() + " " + token.getAccessToken())
                 .setBaseUri(token.getInstanceUrl() + properties.getProperty("SERVICE")
                         + properties.getProperty("VERSION"));
+        createAccount();
+        createContact();
+        createPriceBook();
+        activatePriceBook();
     }
-    @BeforeMethod(onlyForGroups = {"CreateContractWithFullValues", "CreateContractWithMinimumValues"})
-    public void beforeCreateAccount() throws JsonProcessingException {
+
+    @AfterTest
+    public void afterExecution() {
+        apiRequest.clearBody();
+        deleteAccount();
+        deleteContact();
+        deletePriceBook();
+    }
+
+    public void createAccount() throws JsonProcessingException {
         account = new Account();
         account.setName("TestAccount");
         apiRequest.method(ApiMethod.POST)
@@ -54,11 +78,10 @@ public class ContractBaseTest extends BaseTests {
         apiResponse.getResponse().then().log().body();
         account.setId(apiResponse.getBody(Response.class).getId());
     }
-    @BeforeMethod(onlyForGroups = {"CreateContractWithFullValues"})
-    public void beforeCreateContact() throws JsonProcessingException {
+
+    public void createContact() throws JsonProcessingException {
         contact = new Contact();
         contact.setLastName("TestContact");
-        contact.setEmail("jala@mail.com");
         apiRequest.method(ApiMethod.POST)
                 .endpoint(ApiEndPoints.CONTACT)
                 .body(new ObjectMapper().writeValueAsString(contact));
@@ -70,8 +93,27 @@ public class ContractBaseTest extends BaseTests {
         contact.setId(apiResponse.getBody(Response.class).getId());
     }
 
-    @AfterMethod(onlyForGroups = {"CreateContractWithFullValues","CreateContractWithMinimumValues"})
-    public void afterDeleteAccount() {
+    public void createPriceBook() throws JsonProcessingException {
+        priceBook = new PriceBook();
+        priceBook.setName("Standard");
+        apiRequest.method(ApiMethod.POST)
+                .endpoint(ApiEndPoints.PRICEBOOK)
+                .body(new ObjectMapper().writeValueAsString(priceBook));
+        apiResponse = new ApiResponse();
+        ApiManager.execute(apiRequest, apiResponse);
+        apiResponse.getResponse().then().log().body();
+        priceBook.setId(apiResponse.getBody(Response.class).getId());
+    }
+    public void activatePriceBook() throws JsonProcessingException {
+        apiRequest.method(ApiMethod.PATCH)
+                .endpoint(ApiEndPoints.PRICEBOOK_ID)
+                .addPathParam("PRICEBOOK_ID", priceBook.getId())
+                .body("{\"IsActive\": \"true\"}");
+        apiResponse = new ApiResponse();
+        ApiManager.execute(apiRequest, apiResponse);
+    }
+
+    public void deleteAccount() {
         apiRequest.clearPathParam();
         apiRequest.method(ApiMethod.DELETE)
                 .endpoint(ApiEndPoints.ACCOUNT_ID)
@@ -82,8 +124,8 @@ public class ContractBaseTest extends BaseTests {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
         apiResponse.getResponse().then().log().body();
     }
-    @AfterMethod(onlyForGroups = {"CreateContractWithFullValues"})
-    public void afterDeleteContact() {
+
+    public void deleteContact() {
         apiRequest.clearPathParam();
         apiRequest.method(ApiMethod.DELETE)
                 .endpoint(ApiEndPoints.CONTACT_ID)
@@ -94,8 +136,13 @@ public class ContractBaseTest extends BaseTests {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
         apiResponse.getResponse().then().log().body();
     }
-    @AfterClass
-    public void AfterRequest() {
-        apiRequest = new ApiRequest();
+    public void deletePriceBook() {
+        apiRequest.clearPathParam();
+        apiRequest.method(ApiMethod.DELETE)
+                .endpoint(ApiEndPoints.PRICEBOOK_ID)
+                .addPathParam("PRICEBOOK_ID", priceBook.getId());
+        apiResponse = new ApiResponse();
+        ApiManager.execute(apiRequest, apiResponse);
+        apiResponse.getResponse().then().log().body();
     }
 }

@@ -1,5 +1,6 @@
 package salesforce.ui.pages.classic.contracts;
 
+import core.selenium.WebDriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import salesforce.ui.pages.BasePage;
@@ -12,6 +13,15 @@ public class ClassicCreatedContractPage extends BasePage {
 
     @FindBy(css = ".allTabsArrow")
     private WebElement addObjects;
+
+    /**
+     * Initializes the elements and wait for page to be loaded.
+     *
+     * @param newWebDriverManager to be managed.
+     */
+    public ClassicCreatedContractPage(final WebDriverManager newWebDriverManager) {
+        super(newWebDriverManager);
+    }
 
     /**
      * Waits for the page to be loaded.
@@ -28,7 +38,7 @@ public class ClassicCreatedContractPage extends BasePage {
      */
     public ClassicHomePageObjects clickAddObjects() {
         webElementAction.clickField(addObjects);
-        return new ClassicHomePageObjects();
+        return new ClassicHomePageObjects(webDriverManager);
     }
 
     /**

@@ -1,5 +1,6 @@
 package salesforce.ui.pages.classic.contracts;
 
+import core.selenium.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,6 +45,15 @@ public class ClassicNewContractPage extends BasePage {
     private WebElement saveAndNew;
     @FindBy(css = "td[id='bottomButtonRow'] input[title='Cancel']")
     private WebElement cancel;
+
+    /**
+     * Initializes the elements and wait for page to be loaded.
+     *
+     * @param newWebDriverManager to be managed.
+     */
+    public ClassicNewContractPage(final WebDriverManager newWebDriverManager) {
+        super(newWebDriverManager);
+    }
 
     /**
      * Waits for the page to be loaded.
@@ -223,7 +233,7 @@ public class ClassicNewContractPage extends BasePage {
      */
     public ClassicCreatedContractPage clickSave() {
         this.save.click();
-        return new ClassicCreatedContractPage();
+        return new ClassicCreatedContractPage(webDriverManager);
     }
 
     /**
@@ -233,7 +243,7 @@ public class ClassicNewContractPage extends BasePage {
      */
     public ClassicNewContractPage clickSaveAndNew() {
         this.saveAndNew.click();
-        return new ClassicNewContractPage();
+        return new ClassicNewContractPage(webDriverManager);
     }
 
     /**
@@ -243,7 +253,7 @@ public class ClassicNewContractPage extends BasePage {
      */
     public ClassicContractsPage clickCancel() {
         this.cancel.click();
-        return new ClassicContractsPage();
+        return new ClassicContractsPage(webDriverManager);
     }
 
 }

@@ -16,6 +16,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * This class the common web element actions.
  */
 public class WebElementAction {
+    private WebDriverManager webDriverManager;
+
+    /**
+     * Initializes the elements and wait for page to be loaded.
+     *
+     * @param newWebDriverManager to be managed.
+     */
+    public WebElementAction(final WebDriverManager newWebDriverManager) {
+        this.webDriverManager = newWebDriverManager;
+    }
 
     /**
      * Waits until a text box is visible and writes a text.
@@ -23,7 +33,7 @@ public class WebElementAction {
      * @param webElement the web element to be waited.
      */
     public void waitForVisible(final WebElement webElement) {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
+        webDriverManager.getWait().until(ExpectedConditions.visibilityOf(webElement));
     }
 
     /**
@@ -33,7 +43,7 @@ public class WebElementAction {
      * @param typeText   value that will set.
      */
     public void setInputField(final WebElement webElement, final String typeText) {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
+        waitForVisible(webElement);
         webElement.clear();
         webElement.sendKeys(typeText);
     }
@@ -44,7 +54,7 @@ public class WebElementAction {
      * @param webElement is what we want to click.
      */
     public void clickField(final WebElement webElement) {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
+        waitForVisible(webElement);
         webElement.click();
     }
     /**
@@ -53,16 +63,16 @@ public class WebElementAction {
      * @param locator is what we want to click.
      */
     public void clickFieldByLocator(final String locator) {
-        WebDriverManager.getInstance().getWait()
+        webDriverManager.getWait()
                 .until(ExpectedConditions.elementToBeClickable(By.linkText(locator)));
-        WebDriverManager.getInstance().getWebDriver().findElement(By.linkText(locator)).click();
+        webDriverManager.getWebDriver().findElement(By.linkText(locator)).click();
     }
 
     /**
      * Scrolls to the end of the page.
      */
     public void dropDownTillTheEnd() {
-        JavascriptExecutor jse = (JavascriptExecutor) WebDriverManager.getInstance().getWebDriver();
+        JavascriptExecutor jse = (JavascriptExecutor) webDriverManager.getWebDriver();
         jse.executeScript("window.scrollBy(0,250)");
     }
 
@@ -73,7 +83,7 @@ public class WebElementAction {
      * @return web element's text
      */
     public String getTextOfElement(final WebElement webElement) {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
+        waitForVisible(webElement);
         return webElement.getText();
     }
 
@@ -84,6 +94,6 @@ public class WebElementAction {
      * @return web element's text
      */
     public String getTextOfElementByField(final String field) {
-        return WebDriverManager.getInstance().getWebDriver().findElement(By.xpath(field)).getText();
+        return webDriverManager.getWebDriver().findElement(By.xpath(field)).getText();
     }
 }

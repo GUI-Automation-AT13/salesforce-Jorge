@@ -5,23 +5,37 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  */
-package salesforce.ui;
+package salesforce.ui.utils;
 
 import core.selenium.WebDriverManager;
 import salesforce.config.EnvConfig;
+import salesforce.ui.pages.LoginPage;
 import salesforce.ui.pages.classic.contracts.ClassicContractsPage;
 import salesforce.ui.pages.lightning.contracts.ContractsPage;
 
 public class PageTransporter {
 
     private String baseUrl = EnvConfig.getInstance().getBaseUrl();
+    private String featureUrl = "lightning/o/%s/list?filterName=Recent";
+    private WebDriverManager webDriverManager;
+
+    /**
+     * Goes directly to a page by an url.
+     *
+     * @param newWebDriverManager to go.
+     */
+    public PageTransporter(final WebDriverManager newWebDriverManager) {
+        this.webDriverManager = newWebDriverManager;
+    }
+
     /**
      * Goes directly to a page by an url.
      *
      * @param url to go.
      */
     public void goToURL(final String url) {
-        WebDriverManager.getInstance().getWebDriver().navigate().to(url);
+        webDriverManager.getWebDriver().navigate().to(url);
+        webDriverManager.getWebDriver().manage().window().maximize();
     }
 
     /**
@@ -31,8 +45,9 @@ public class PageTransporter {
      */
     public ClassicContractsPage navigateToContractsPage() {
         goToURL(baseUrl.concat("800/o"));
-        return new ClassicContractsPage();
+        return new ClassicContractsPage(webDriverManager);
     }
+
     /**
      * Navigates to Contracts page on lightning version.
      *
@@ -40,6 +55,25 @@ public class PageTransporter {
      */
     public ContractsPage navigateToContractsPageLightning() {
         goToURL(baseUrl.concat("lightning/o/Contract/list?filterName=Recent"));
-        return new ContractsPage();
+        return new ContractsPage(webDriverManager);
+    }
+
+    /**
+     * Navigates to feature page on lightning version.
+     *
+     * @param featureName .
+     */
+    public void navigateToFeaturePage(final String featureName) {
+        goToURL(baseUrl.concat(String.format(featureUrl, featureName)));
+    }
+
+    /**
+     * Navigates to login page.
+     *
+     * @return the login page.
+     */
+    public LoginPage navigateToLoginPage() {
+        goToURL(baseUrl);
+        return new LoginPage(webDriverManager);
     }
 }

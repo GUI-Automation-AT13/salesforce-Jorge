@@ -16,6 +16,15 @@ public class ClassicContractsPage extends BasePage {
     private WebElement popup;
 
     /**
+     * Initializes the elements and wait for page to be loaded.
+     *
+     * @param newWebDriverManager to be managed.
+     */
+    public ClassicContractsPage(final WebDriverManager newWebDriverManager) {
+        super(newWebDriverManager);
+    }
+
+    /**
      * Waits for the page to be loaded.
      */
     @Override
@@ -27,7 +36,7 @@ public class ClassicContractsPage extends BasePage {
      * Closes a popup.
      */
     public void clickPopUP() {
-        WebDriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(By.id("tryLexDialogX")));
+        webDriverManager.getWait().until(ExpectedConditions.elementToBeClickable(By.id("tryLexDialogX")));
         popup.click();
     }
     /**
@@ -37,7 +46,7 @@ public class ClassicContractsPage extends BasePage {
      */
     public ClassicNewContractPage clickNew() {
         newContractButton.click();
-        return new ClassicNewContractPage();
+        return new ClassicNewContractPage(webDriverManager);
     }
 
 }
