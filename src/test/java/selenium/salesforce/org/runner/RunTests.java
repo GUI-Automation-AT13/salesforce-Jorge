@@ -8,6 +8,7 @@ import api.salesforce.ApiEndPoints;
 import api.salesforce.Authentication;
 import api.salesforce.entities.Account;
 import api.salesforce.entities.Contact;
+import api.salesforce.entities.PriceBook;
 import api.salesforce.entities.Response;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,8 +35,10 @@ public class RunTests extends AbstractTestNGCucumberTests {
     public Authentication authentication = new Authentication();
     public Account account;
     public Contact contact;
+    public PriceBook priceBook;
+
     @Override
-    @DataProvider(parallel = true)
+    @DataProvider(parallel = false)
     public Object[][] scenarios(){
         return super.scenarios();
     }
@@ -50,13 +53,16 @@ public class RunTests extends AbstractTestNGCucumberTests {
                         + properties.getProperty("VERSION"));
         createAccount();
         createContact();
+        createPriceBook();
+        activatePriceBook();
     }
 
     @AfterTest
     public void afterExecution() {
+        apiRequest.clearBody();
         deleteAccount();
         deleteContact();
-        apiRequest = new ApiRequest();
+        deletePriceBook();
     }
 
     public void createAccount() throws JsonProcessingException {
@@ -76,7 +82,6 @@ public class RunTests extends AbstractTestNGCucumberTests {
     public void createContact() throws JsonProcessingException {
         contact = new Contact();
         contact.setLastName("TestContact");
-        contact.setEmail("jala@mail.com");
         apiRequest.method(ApiMethod.POST)
                 .endpoint(ApiEndPoints.CONTACT)
                 .body(new ObjectMapper().writeValueAsString(contact));
@@ -86,6 +91,26 @@ public class RunTests extends AbstractTestNGCucumberTests {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_CREATED);
         apiResponse.getResponse().then().log().body();
         contact.setId(apiResponse.getBody(Response.class).getId());
+    }
+
+    public void createPriceBook() throws JsonProcessingException {
+        priceBook = new PriceBook();
+        priceBook.setName("Standard");
+        apiRequest.method(ApiMethod.POST)
+                .endpoint(ApiEndPoints.PRICEBOOK)
+                .body(new ObjectMapper().writeValueAsString(priceBook));
+        apiResponse = new ApiResponse();
+        ApiManager.execute(apiRequest, apiResponse);
+        apiResponse.getResponse().then().log().body();
+        priceBook.setId(apiResponse.getBody(Response.class).getId());
+    }
+    public void activatePriceBook() throws JsonProcessingException {
+        apiRequest.method(ApiMethod.PATCH)
+                .endpoint(ApiEndPoints.PRICEBOOK_ID)
+                .addPathParam("PRICEBOOK_ID", priceBook.getId())
+                .body("{\"IsActive\": \"true\"}");
+        apiResponse = new ApiResponse();
+        ApiManager.execute(apiRequest, apiResponse);
     }
 
     public void deleteAccount() {
@@ -111,5 +136,13 @@ public class RunTests extends AbstractTestNGCucumberTests {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
         apiResponse.getResponse().then().log().body();
     }
-
+    public void deletePriceBook() {
+        apiRequest.clearPathParam();
+        apiRequest.method(ApiMethod.DELETE)
+                .endpoint(ApiEndPoints.PRICEBOOK_ID)
+                .addPathParam("PRICEBOOK_ID", priceBook.getId());
+        apiResponse = new ApiResponse();
+        ApiManager.execute(apiRequest, apiResponse);
+        apiResponse.getResponse().then().log().body();
+    }
 }

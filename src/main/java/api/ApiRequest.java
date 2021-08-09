@@ -251,6 +251,15 @@ public class ApiRequest {
         this.setBody(newBody);
         return this;
     }
+    /**
+     * Gets the apiRequest.
+     *
+     * @return tha apiRequest body.
+     */
+    public ApiRequest clearBody() {
+        this.setBody("");
+        return this;
+    }
 
     /**
      * Gets the apiRequest.
