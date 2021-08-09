@@ -1,0 +1,39 @@
+package salesforce.ui.pages.classic;
+
+import core.selenium.WebDriverManager;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import salesforce.ui.pages.BasePage;
+import salesforce.ui.pages.classic.contracts.ClassicContractsPage;
+
+public class ClassicHomePageObjects extends BasePage {
+
+    @FindBy(css = ".listRelatedObject.contractBlock.title")
+    private WebElement contractBtn;
+
+    /**
+     * Initializes the elements and wait for page to be loaded.
+     *
+     * @param newWebDriverManager to be managed.
+     */
+    public ClassicHomePageObjects(final WebDriverManager newWebDriverManager) {
+        super(newWebDriverManager);
+    }
+
+    /**
+     * Waits for the page to be loaded.
+     */
+    @Override
+    protected void waitForPageLoaded() {
+        webElementAction.waitForVisible(contractBtn);
+    }
+    /**
+     * Clicks on the add object button.
+     *
+     * @return a new ContractsPage
+     */
+    public ClassicContractsPage clickAddObject() {
+        contractBtn.click();
+        return new ClassicContractsPage(webDriverManager);
+    }
+}
