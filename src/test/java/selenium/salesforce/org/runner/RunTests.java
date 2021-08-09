@@ -44,6 +44,21 @@ public class RunTests extends AbstractTestNGCucumberTests {
     }
     @BeforeClass
     public void loginAndSetup() throws JsonProcessingException {
+        apiLogin();
+        createAccount();
+        createContact();
+        createPriceBook();
+        activatePriceBook();
+    }
+
+    @AfterClass
+    public void afterExecution() {
+        apiRequest.clearBody();
+        deleteAccount();
+        deleteContact();
+        deletePriceBook();
+    }
+    public void apiLogin(){
         apiRequest = new ApiRequest();
         Properties properties = PropertiesReader.getProperties("config.properties");
         authentication.getAuth();
@@ -51,18 +66,6 @@ public class RunTests extends AbstractTestNGCucumberTests {
                 .addHeader(HttpHeaders.AUTHORIZATION, token.getTokenType() + " " + token.getAccessToken())
                 .setBaseUri(token.getInstanceUrl() + properties.getProperty("SERVICE")
                         + properties.getProperty("VERSION"));
-        createAccount();
-        createContact();
-        createPriceBook();
-        activatePriceBook();
-    }
-
-    @AfterTest
-    public void afterExecution() {
-        apiRequest.clearBody();
-        deleteAccount();
-        deleteContact();
-        deletePriceBook();
     }
 
     public void createAccount() throws JsonProcessingException {

@@ -7,6 +7,7 @@ Feature: Create Contract
       | Account Name           | TestAccount |
       | Contract Term (months) | 2           |
       | Contract Start Date    | 7/15/2021   |
+    Then I verify the success message
     Then I verify the Contract created with the set fields
       | Account Name           | TestAccount |
       | Contract Term (months) | 2           |
@@ -27,6 +28,7 @@ Feature: Create Contract
       | Company Signed Date     | 7/19/2021           |
       | Special Terms           | Special Terms       |
       | Description             | Description         |
+    Then I verify the success message
     Then I verify the Contract created with the set fields
       | Account Name            | TestAccount         |
       | Contract Term (months)  | 2                   |
