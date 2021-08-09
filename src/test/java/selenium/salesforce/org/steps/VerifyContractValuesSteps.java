@@ -12,6 +12,7 @@ import java.util.Map;
 public class VerifyContractValuesSteps {
     private WebDriverManager webDriverManager;
     private CreatedContractPage createdContractPage;
+    private Map<String,String> dataMap;
     public SoftAssert softAssert;
 
     public VerifyContractValuesSteps(final WebDriverManager newWebDriverManager) {
@@ -22,8 +23,10 @@ public class VerifyContractValuesSteps {
     @Then("I verify the Contract created with the set fields")
     public void iVerifyTheContractCreatedWithTheSetFields(final Map<String, String> table) {
         createdContractPage = new CreatedContractPage(webDriverManager);
-        List<String> valuesField = createdContractPage.getValueField(table);
-        softAssert.assertEquals(valuesField, new ArrayList<>(table.values()));
+        dataMap = table;
+        softAssert.assertEquals(createdContractPage.getSuccessContractNumber(), createdContractPage.getContractNumber());
+        List<String> valuesField = createdContractPage.getValueField(dataMap);
+        softAssert.assertEquals(valuesField, new ArrayList<>(dataMap.values()));
         softAssert.assertAll();
     }
 }

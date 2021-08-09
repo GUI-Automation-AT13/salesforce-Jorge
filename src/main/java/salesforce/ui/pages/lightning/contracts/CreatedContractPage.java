@@ -12,6 +12,10 @@ import java.util.Map;
 
 public class CreatedContractPage extends BasePage {
 
+    @FindBy(css = ".slds-theme--success")
+    private WebElement successMessage;
+    @FindBy(xpath = "//h1/div//span")
+    private WebElement contractNumber;
     @FindBy(xpath = "(//span[text()='Details'])[last()]")
     private WebElement details;
     @FindBy(xpath = "(//ul//li//div//span[@title=\"Account Name\"] /following-sibling::div)[last()]")
@@ -20,36 +24,8 @@ public class CreatedContractPage extends BasePage {
     private WebElement contractStartDateTitle;
     @FindBy(xpath = "(//ul//li//div//span[@title=\"Contract End Date\"] /following-sibling::div)[last()]")
     private WebElement contractEndDateTitle;
-    @FindBy(xpath = "//div[./div[./span[text()='Contract Owner']]]//a")
-    private WebElement contractOwner;
-    @FindBy(xpath = "//div[./div[./span[text()='Status']]]//span//span")
-    private WebElement status;
     @FindBy(xpath = "(//div[./div[./span[text()='Contract Start Date']]]//span//span)[last()]")
     private WebElement contractStartDate;
-    @FindBy(xpath = "//div[./div[./span[text()='Account Name']]]//a")
-    private WebElement accountName;
-    @FindBy(xpath = "//div[./div[./span[text()='Contract End Date']]]//span//span")
-    private WebElement contractEndDate;
-    @FindBy(xpath = "//div[./div[./span[text()='Customer Signed By']]]//a")
-    private WebElement customerSignedBy;
-    @FindBy(xpath = "//div[./div[./span[text()='Contract Term (months)']]]//span//span")
-    private WebElement contractTerm;
-    @FindBy(xpath = "//div[./div[./span[text()='Customer Signed Title']]]//span//span")
-    private WebElement customerSignedTitle;
-    @FindBy(xpath = "//div[./div[./span[text()='Owner Expiration Notice']]]//span//span")
-    private WebElement ownerExpirationNotice;
-    @FindBy(xpath = "//div[./div[./span[text()='Customer Signed Date']]]//span//span")
-    private WebElement customerSignedDate;
-    @FindBy(xpath = "//div[./div[./span[text()='Company Signed By']]]//button/preceding-sibling::span")
-    private WebElement companySignedBy;
-    @FindBy(xpath = "//div[./div[./span[text()='Price Book']]]//a")
-    private WebElement priceBook;
-    @FindBy(xpath = "//div[./div[./span[text()='Company Signed Date']]]//button/preceding-sibling::span")
-    private WebElement companySignedDate;
-    @FindBy(xpath = "//div[./div[./span[text()='Special Terms']]]//span//span")
-    private WebElement specialTerms;
-    @FindBy(xpath = "//div[./div[./span[text()='Description']]]//span//span")
-    private WebElement description;
     private static final String BASE_XPATH = "//div[./div[./span[text()='%s']]]";
     private static final HashMap<String, String> XPATH_COMPLEMENTS = new HashMap<>();
     static {
@@ -108,7 +84,24 @@ public class CreatedContractPage extends BasePage {
     public String contractStartDateText() {
         return webElementAction.getTextOfElement(contractStartDate);
     }
+    /**
+     * Gets the text inside the element.
+     *
+     * @return the text set on success contract message.
+     */
+    public String getSuccessContractNumber() {
+        String contractNum = webElementAction.getTextOfElement(successMessage);
 
+        return contractNum.replaceAll("[^0-9]", "");
+    }
+    /**
+     * Gets the text inside the element.
+     *
+     * @return the text set on success contract message.
+     */
+    public String getContractNumber() {
+        return webElementAction.getTextOfElement(contractNumber);
+    }
     /**
      * Waits for the page to be loaded.
      */
@@ -124,6 +117,8 @@ public class CreatedContractPage extends BasePage {
      * @param table .
      */
     public List<String> getValueField(final Map<String, String> table) {
+        webElementAction.clickElement(details);
+        webElementAction.scrollToBottom();
         List<String> result = new ArrayList<>();
         HashMap<String, GetString> actionsCreatedMap = getTxtFields();
         table.keySet().forEach(key -> result.add(actionsCreatedMap.get(key).getString()));
@@ -135,8 +130,6 @@ public class CreatedContractPage extends BasePage {
      * @return a map with methods of CreatedWorkType
      */
     private HashMap<String, GetString> getTxtFields() {
-        webElementAction.clickElement(details);
-        webElementAction.scrollToBottom();
         HashMap<String, GetString> mapValues = new HashMap<>();
         mapValues.put("Account Name", () -> getTextByField("Account Name"));
         mapValues.put("Contract Term (months)", () -> getTextByField("Contract Term (months)"));
